@@ -20,7 +20,7 @@ def go(args):
     # Download input artifact. This will also log that this script is using this
     
     run = wandb.init(project="nyc_airbnb", group="cleaning", save_code=True)
-    artifact_local_path = run.use_artifact(args.input_artifact).file()
+    artifact_local_path = run.use_artifact("sample.csv:v0").file()
     df = pd.read_csv(artifact_local_path)
     # Drop outliers
     min_price = args.min_price
@@ -48,51 +48,49 @@ def go(args):
 # TODO: In the code below, fill in the data type for each argumemt. The data type should be str, float or int. 
 # TODO: In the code below, fill in a description for each argument. The description should be a string.
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(description="A very basic data cleaning")
-  
+
     parser.add_argument(
         "--input_artifact", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        type=str,
+        help="Initial artifact to be cleaned",
+        required=True
     )
 
     parser.add_argument(
         "--output_artifact", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        type=str,
+        help="Output artifact for cleaned data",
+        required=True
     )
 
     parser.add_argument(
         "--output_type", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        type=str,
+        help="Type of the output dataset",
+        required=True
     )
 
     parser.add_argument(
         "--output_description", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        type=str,
+        help="Description of the output dataset",
+        required=True
     )
 
     parser.add_argument(
         "--min_price", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        type=float,
+        help="Minimum house price to be considered",
+        required=True
     )
 
     parser.add_argument(
         "--max_price",
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        type=float,
+        help="Maximum house price to be considered",
+        required=True
     )
-
 
     args = parser.parse_args()
 
